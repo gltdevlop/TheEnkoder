@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+import os
 
 # Génère une clé et l'enregistre dans un fichier
 def keygen():
@@ -19,16 +20,19 @@ def encode(password):
     return encoded_password.decode()  # Retourner le mot de passe encodé en chaîne de caractères
 
 
-
 print("Welcome to The Enkoder")
 print("If you have a key, place the key.txt in the .py folder and enter A")
 print("If you don't, press O and we'll generate a key.txt for you that you can use to decode.")
 choice = input("Your choice : ")
 
 if choice == "A":
-    password = input("Enter the text to encode: ")
-    encoded_password = encode(password)  # Encode le mot de passe
-    print(f"Encoded text : {encoded_password}")
+    if(os.path.isfile("key.txt")):
+        password = input("Enter the text to encode: ")
+        encoded_password = encode(password)  # Encode le mot de passe
+        print(f"Encoded text : {encoded_password}")
+    else:
+        print("Key not present. Please restart the software and use the O Method.")
+        quit()
 
 elif choice == "O":
     password = input("Enter the text to encode: ")

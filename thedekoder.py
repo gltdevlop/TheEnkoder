@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+import os
 
 def load_key():
     with open("key.txt", "rb") as file:
@@ -11,6 +12,13 @@ def decode(encoded_password):
     return decoded_password.decode()
 
 print("Welcome to The Dekoder")
-encoded_password = input("Enter the encoded text : ")
-decoded_password = decode(encoded_password)
-print(f"Decoded : {decoded_password}")
+print("Please place the key you used to encode your text in the same folder that thedekoder.py is.")
+
+if (os.path.isfile("key.txt")):
+    encoded_password = input("Enter the encoded text : ")
+    decoded_password = decode(encoded_password)
+    print(f"Decoded : {decoded_password}")
+else:
+    print("Key not present. Please restart the software and place the key to decode.")
+    quit()
+
